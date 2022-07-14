@@ -1,9 +1,11 @@
 # Linters using docker
 
 
-#### **hadolint** for *Dockerfiles*
-#### **yapf** for *python* files
-#### **yamllint** for *YAML* files
+ **hadolint** for *Dockerfiles*
+ 
+ **yapf** for *python* files
+ 
+ **yamllint** for *YAML* files
 ________
 ##### 1. Copy a Dockerfile from this repository.
 ##### 2. Run a shell script `lint.sh`
