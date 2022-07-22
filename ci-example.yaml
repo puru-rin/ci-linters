@@ -1,0 +1,34 @@
+image: .....
+
+stages:
+  - test
+
+before_script:
+  - pip install --upgrade pip
+  - pip install yapf
+  - wget -O /bin/sql-lint https://github.com/joereynolds/sql-lint/releases/download/v0.0.19/sql-lint-linux
+  - chmod +x /bin/sql-lint
+
+yapf:
+  stage: test
+  script:
+  - echo ----------------------------YAPF----------------------------------
+  - find $1 -name '*.py' | while read fname; do
+  - printf "\n $fname \n";
+  - yapf --style google < "$fname";
+  - done
+  
+sql-lint:
+  stage: test
+  script:
+  - echo ----------------------------SQL-----------------------------------
+  - find $1 -name '*.sql' | while read fname; do
+  - printf "\n $fname \n";
+  - sql-lint --driver="postgres" < "$fname";
+  - done
+  
+# This script installs linters for python files and SQL (Postgre) in the pipeline
+
+# And then it will check all files with *.py and *.sql extensions in the repository (the address in the $1 argument)
+
+# And according to the linter syntax, it will output the logs to the build pipeline.
